@@ -48,19 +48,16 @@ export function setupAuth(app: Express) {
     cookie: {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
       httpOnly: true,
+      secure: app.get("env") === "production",
+      sameSite: "lax"
     },
     store: new MemoryStore({
-      checkPeriod: 86400000,
-    }),
+      checkPeriod: 86400000
+    })
   };
 
   if (app.get("env") === "production") {
     app.set("trust proxy", 1);
-    sessionSettings.cookie = {
-      ...sessionSettings.cookie,
-      secure: true,
-      sameSite: "lax",
-    };
   }
 
   app.use(session(sessionSettings));
@@ -99,16 +96,25 @@ export function setupAuth(app: Express) {
   );
 
   passport.serializeUser((user, done) => {
+    console.log(`Serializing user: ${user.username} (ID: ${user.id})`);
     done(null, user.id);
   });
 
   passport.deserializeUser(async (id: number, done) => {
     try {
+      console.log(`Deserializing user with id: ${id}`);
       const [user] = await db
         .select()
         .from(users)
         .where(eq(users.id, id))
         .limit(1);
+
+      if (!user) {
+        console.log(`No user found with id: ${id}`);
+        return done(null, false);
+      }
+
+      console.log(`Successfully deserialized user: ${user.username}`);
       done(null, user);
     } catch (err) {
       console.error("Session deserialization error:", err);
@@ -116,7 +122,6 @@ export function setupAuth(app: Express) {
     }
   });
 
-  // Update routes to use /api prefix
   app.post("/api/register", async (req, res, next) => {
     try {
       console.log("Registration attempt:", req.body.username);

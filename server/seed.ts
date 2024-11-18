@@ -36,16 +36,20 @@ interface CompanyData {
   location: string;
 }
 
-function flattenSkills(skills: string[] | { [key: string]: string[] }[]): string[] {
+function processSkills(skills: string[] | { [key: string]: string[] }[]): any {
   if (Array.isArray(skills)) {
     if (skills.length > 0 && typeof skills[0] === 'string') {
-      return skills as string[];
+      return { skills: skills };
     }
-    return (skills as { [key: string]: string[] }[]).reduce((acc: string[], skill) => {
-      return [...acc, ...Object.values(skill).flat()];
-    }, []);
+    const processedSkills: { [key: string]: string[] } = {};
+    (skills as { [key: string]: string[] }[]).forEach(skillObj => {
+      Object.entries(skillObj).forEach(([key, value]) => {
+        processedSkills[key] = value;
+      });
+    });
+    return processedSkills;
   }
-  return [];
+  return { skills: [] };
 }
 
 const sampleData = {
@@ -344,7 +348,6 @@ async function seedDatabase() {
     
     // Seed Students
     for (const student of sampleData.students) {
-      // Check if user already exists
       const [existingUser] = await db
         .select()
         .from(users)
@@ -352,7 +355,6 @@ async function seedDatabase() {
         .limit(1);
 
       if (!existingUser) {
-        // Create user
         const hashedPassword = await crypto.hash(student.id);
         const [newUser] = await db
           .insert(users)
@@ -365,12 +367,11 @@ async function seedDatabase() {
           })
           .returning();
 
-        // Create profile with properly flattened skills
         await db.insert(profiles).values({
           userId: newUser.id,
           name: student.name,
           bio: student.project_experience?.[0]?.description || student.idea_overview?.[0]?.description,
-          skills: flattenSkills(student.skills),
+          skills: processSkills(student.skills),
           experience: student.project_experience
             ?.map(exp => `${exp.project_name}: ${exp.description}`)
             .join('\n'),
@@ -391,7 +392,6 @@ async function seedDatabase() {
         .limit(1);
 
       if (!existingUser) {
-        // Create user
         const hashedPassword = await crypto.hash(company.id);
         const [newUser] = await db
           .insert(users)
@@ -404,14 +404,13 @@ async function seedDatabase() {
           })
           .returning();
 
-        // Create profile
         const skills = [...(company.expertise || []), ...(company.focus_areas || [])];
         
         await db.insert(profiles).values({
           userId: newUser.id,
           name: company.name,
           bio: company.projects[0].description,
-          skills: skills,
+          skills: { skills: skills },
           experience: company.projects
             .map(proj => `${proj.project_name}: ${proj.description}`)
             .join('\n'),

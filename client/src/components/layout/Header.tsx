@@ -32,25 +32,25 @@ export default function Header() {
         <NavigationMenu>
           <NavigationMenuList className="hidden md:flex space-x-4">
             <NavigationMenuItem>
-              <Link href="/matching">
-                <NavigationMenuLink className="cursor-pointer">
+              <NavigationMenuLink asChild>
+                <Link href="/matching" className="cursor-pointer">
                   {t("common.matching")}
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/events">
-                <NavigationMenuLink className="cursor-pointer">
+              <NavigationMenuLink asChild>
+                <Link href="/events" className="cursor-pointer">
                   {t("common.events")}
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/support">
-                <NavigationMenuLink className="cursor-pointer">
+              <NavigationMenuLink asChild>
+                <Link href="/support" className="cursor-pointer">
                   {t("common.support")}
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

@@ -56,8 +56,7 @@ const sampleData = {
       interests: ["AI", "Webサービス", "教育テクノロジー"],
       location: "Tokyo",
       availability: "週10時間"
-    },
-    // ... other students
+    }
   ],
   companies: [
     {
@@ -72,12 +71,11 @@ const sampleData = {
         }
       ],
       location: "Tokyo"
-    },
-    // ... other companies
+    }
   ]
 };
 
-async function seedUsers() {
+async function seedDatabase() {
   console.log("Starting database seeding...");
 
   try {
@@ -92,7 +90,7 @@ async function seedUsers() {
 
       if (!existingUser) {
         // Create user
-        const hashedPassword = await crypto.hash(student.id); // Using ID as initial password
+        const hashedPassword = await crypto.hash(student.id);
         const [newUser] = await db
           .insert(users)
           .values({
@@ -140,7 +138,7 @@ async function seedUsers() {
 
       if (!existingUser) {
         // Create user
-        const hashedPassword = await crypto.hash(company.id); // Using ID as initial password
+        const hashedPassword = await crypto.hash(company.id);
         const [newUser] = await db
           .insert(users)
           .values({
@@ -180,5 +178,5 @@ async function seedUsers() {
   }
 }
 
-// Export the seeding function
-export { seedUsers };
+// Run the seeding function
+seedDatabase().catch(console.error);

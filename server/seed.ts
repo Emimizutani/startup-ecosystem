@@ -367,13 +367,11 @@ async function seedDatabase() {
           .returning();
 
         // Create profile
-        const flattenedSkills = flattenSkills(student.skills);
-
         await db.insert(profiles).values({
           userId: newUser.id,
           name: student.name,
           bio: student.project_experience?.[0]?.description || student.idea_overview?.[0]?.description,
-          skills: flattenedSkills,
+          skills: flattenSkills(student.skills),
           experience: student.project_experience
             ?.map(exp => `${exp.project_name}: ${exp.description}`)
             .join('\n'),

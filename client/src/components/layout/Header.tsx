@@ -24,7 +24,9 @@ export default function Header() {
     <header className="border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/">
-          <a className="text-2xl font-bold text-primary">StartupEcosystem</a>
+          <span className="text-2xl font-bold text-primary cursor-pointer">
+            StartupEcosystem
+          </span>
         </Link>
 
         <NavigationMenu>
@@ -78,7 +80,7 @@ export default function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link href="/profile">{t("common.profile")}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => logout()}>

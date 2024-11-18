@@ -5,17 +5,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { insertUserSchema } from "db/schema";
 import { useToast } from "@/hooks/use-toast";
-import { Textarea } from "@/components/ui/textarea";
 import { useLocation } from "wouter";
+import { useState } from "react";
 
 export default function Profile() {
   const { t } = useI18n();
-  const { user, login, register } = useUser();
+  const { user, login, register: registerUser } = useUser();
   const { toast } = useToast();
   const [, setLocation] = useLocation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(insertUserSchema),
@@ -28,19 +29,24 @@ export default function Profile() {
   });
 
   const onSubmit = async (values: any) => {
-    const result = user ? await login(values) : await register(values);
-    if (result.ok) {
-      toast({
-        title: user ? "Login successful" : "Registration successful",
-        description: "Welcome to StartupEcosystem!"
-      });
-      setLocation("/matching");
-    } else {
-      toast({
-        title: "Error",
-        description: result.message,
-        variant: "destructive"
-      });
+    setIsSubmitting(true);
+    try {
+      const result = user ? await login(values) : await registerUser(values);
+      if (result.ok) {
+        toast({
+          title: user ? "Login successful" : "Registration successful",
+          description: result.message || "Welcome to StartupEcosystem!"
+        });
+        setLocation("/matching");
+      } else {
+        toast({
+          title: "Error",
+          description: result.message,
+          variant: "destructive"
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -49,6 +55,15 @@ export default function Profile() {
       <Card>
         <CardHeader>
           <CardTitle>{user ? t("profile.editProfile") : t("common.login")}</CardTitle>
+          <CardDescription>
+            {!user && (
+              <div className="mt-2 text-sm space-y-1">
+                <p>Test credentials:</p>
+                <p>Username: S001</p>
+                <p>Password: S001</p>
+              </div>
+            )}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -60,7 +75,7 @@ export default function Profile() {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} placeholder="Enter your username (e.g., S001)" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -73,7 +88,11 @@ export default function Profile() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" {...field} />
+                      <Input 
+                        type="password" 
+                        {...field} 
+                        placeholder="Enter your password" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -87,15 +106,27 @@ export default function Profile() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" {...field} />
+                        <Input 
+                          type="email" 
+                          {...field} 
+                          placeholder="Enter your email address" 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
               )}
-              <Button type="submit" className="w-full">
-                {user ? t("common.submit") : t("common.login")}
+              <Button 
+                type="submit" 
+                className="w-full"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span>Loading...</span>
+                ) : (
+                  user ? t("common.submit") : t("common.login")
+                )}
               </Button>
             </form>
           </Form>

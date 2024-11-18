@@ -11,19 +11,40 @@ export function useUser() {
     isLoading: !error && !data,
     error,
     login: async (user: InsertUser) => {
-      const res = await handleRequest("/login", "POST", user);
-      mutate();
-      return res;
+      try {
+        console.log("Attempting login for user:", user.username);
+        const res = await handleRequest("/api/login", "POST", user);
+        console.log("Login response:", res);
+        mutate();
+        return res;
+      } catch (error) {
+        console.error("Login error:", error);
+        return { ok: false, message: "Network error occurred. Please try again." };
+      }
     },
     logout: async () => {
-      const res = await handleRequest("/logout", "POST");
-      mutate(undefined);
-      return res;
+      try {
+        console.log("Attempting logout");
+        const res = await handleRequest("/api/logout", "POST");
+        console.log("Logout response:", res);
+        mutate(undefined);
+        return res;
+      } catch (error) {
+        console.error("Logout error:", error);
+        return { ok: false, message: "Network error occurred. Please try again." };
+      }
     },
     register: async (user: InsertUser) => {
-      const res = await handleRequest("/register", "POST", user);
-      mutate();
-      return res;
+      try {
+        console.log("Attempting registration for user:", user.username);
+        const res = await handleRequest("/api/register", "POST", user);
+        console.log("Registration response:", res);
+        mutate();
+        return res;
+      } catch (error) {
+        console.error("Registration error:", error);
+        return { ok: false, message: "Network error occurred. Please try again." };
+      }
     },
   };
 }
@@ -31,6 +52,7 @@ export function useUser() {
 type RequestResult =
   | {
       ok: true;
+      message?: string;
     }
   | {
       ok: false;
@@ -50,13 +72,16 @@ async function handleRequest(
       credentials: "include",
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      return { ok: false, message: errorData.message };
+      console.error("Request failed:", url, data);
+      return { ok: false, message: data.message || "An error occurred" };
     }
 
-    return { ok: true };
+    return { ok: true, message: data.message };
   } catch (e: any) {
-    return { ok: false, message: e.toString() };
+    console.error("Network error:", e);
+    return { ok: false, message: "Network error occurred. Please try again." };
   }
 }

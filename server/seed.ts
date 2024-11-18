@@ -339,7 +339,7 @@ const sampleData = {
 };
 
 // Seed Events
-const events = [
+const eventData = [
   {
     title: "2024年スタートアップビジネスコンテスト",
     description: "新しいアイデアを持つスタートアップ企業が競い合うビジネスコンテスト。優勝者には資金援助とメンターシップが提供されます。",
@@ -364,8 +364,47 @@ const events = [
     sponsor: ["株式会社A", "株式会社B"],
     isOnline: true,
     creatorId: 1
+  },
+  {
+    title: "第3回 Web 開発ハッカソン",
+    description: "最新の技術を使って、革新的なWebアプリケーションを開発するハッカソン。チームで協力して、アイデアを形にするチャンスです。",
+    date: new Date("2024-06-20"),
+    location: "東京・渋谷",
+    registration_deadline: new Date("2024-06-15"),
+    registration_fee: 3000,
+    revenue: 100000,
+    speakers: [
+      {
+        name: "山田 健太郎",
+        role: "エンジニア",
+        bio: "Web開発のスペシャリスト。数々のプロジェクトを成功に導いた経験を持つ。"
+      }
+    ],
+    content: ["ハッカソン", "アイデアソン", "発表会", "審査・表彰"],
+    sponsor: ["株式会社C", "株式会社D"],
+    isOnline: false,
+    creatorId: 2
+  },
+  {
+    title: "AI 活用セミナー",
+    description: "AIの基礎知識から最新技術までを学ぶセミナー。AIに興味がある初心者から、より深く学びたい方まで、幅広い層の方におすすめです。",
+    date: new Date("2024-07-10"),
+    location: "大阪・梅田",
+    registration_deadline: new Date("2024-07-05"),
+    registration_fee: 5000,
+    revenue: 120000,
+    speakers: [
+      {
+        name: "鈴木 美香",
+        role: "AI研究者",
+        bio: "AI研究に長年携わる第一人者。多くの論文を発表している。"
+      }
+    ],
+    content: ["AIの基礎知識", "機械学習", "深層学習", "事例紹介"],
+    sponsor: ["株式会社E", "株式会社F"],
+    isOnline: false,
+    creatorId: 3
   }
-  // Add other events here...
 ];
 
 async function seedDatabase() {
@@ -454,7 +493,7 @@ async function seedDatabase() {
     }
 
     // Seed Events
-    for (const event of events) {
+    for (const event of eventData) {
       await db.insert(events).values(event);
       console.log(`Created event: ${event.title}`);
     }

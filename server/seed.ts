@@ -42,7 +42,8 @@ function flattenSkills(skills: string[] | { [key: string]: string[] }[]): string
       return skills as string[];
     }
     return (skills as { [key: string]: string[] }[]).reduce((acc: string[], skill) => {
-      return [...acc, ...Object.values(skill).flat()]; // Fix: flatten the values of each skill object
+      const values = Object.values(skill).flat();
+      return [...acc, ...values];
     }, []);
   }
   return [];
@@ -365,7 +366,7 @@ async function seedDatabase() {
           })
           .returning();
 
-        // Create profile
+        // Create profile with properly flattened skills
         await db.insert(profiles).values({
           userId: newUser.id,
           name: student.name,

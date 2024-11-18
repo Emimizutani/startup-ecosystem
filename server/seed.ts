@@ -1,5 +1,5 @@
 import { db } from "db";
-import { users, profiles } from "db/schema";
+import { users, profiles, events } from "db/schema";
 import { eq } from "drizzle-orm";
 import { scrypt, randomBytes } from "crypto";
 import { promisify } from "util";
@@ -338,11 +338,42 @@ const sampleData = {
   ]
 };
 
+// Seed Events
+const events = [
+  {
+    title: "2024年スタートアップビジネスコンテスト",
+    description: "新しいアイデアを持つスタートアップ企業が競い合うビジネスコンテスト。優勝者には資金援助とメンターシップが提供されます。",
+    date: new Date("2024-05-15"),
+    location: "オンライン (Zoom)",
+    registration_deadline: new Date("2024-05-10"),
+    registration_fee: 5000,
+    revenue: 150000,
+    speakers: [
+      {
+        name: "田中 太郎",
+        role: "投資家",
+        bio: "国内外のスタートアップに投資している経験豊富な投資家。"
+      },
+      {
+        name: "佐藤 花子",
+        role: "起業家",
+        bio: "スタートアップ企業の創業者。数々のビジネスコンテストで優勝経験がある。"
+      }
+    ],
+    content: ["ビジネスプラン発表", "投資家によるフィードバック", "審査員による評価・表彰式"],
+    sponsor: ["株式会社A", "株式会社B"],
+    isOnline: true,
+    creatorId: 1
+  }
+  // Add other events here...
+];
+
 async function seedDatabase() {
   console.log("Starting database seeding...");
 
   try {
     // Clear existing data first
+    await db.delete(events);
     await db.delete(profiles);
     await db.delete(users);
     
@@ -420,6 +451,12 @@ async function seedDatabase() {
 
         console.log(`Created company: ${company.name}`);
       }
+    }
+
+    // Seed Events
+    for (const event of events) {
+      await db.insert(events).values(event);
+      console.log(`Created event: ${event.title}`);
     }
 
     console.log("Database seeding completed successfully!");

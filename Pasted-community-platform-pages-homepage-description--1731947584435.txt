@@ -1,0 +1,153 @@
+community_platform:
+  pages:
+    - homepage:
+        description: "コミュニティ概要、サービス内容、最新ニュースを表示"
+        features:
+          - mission_and_vision
+          - services_overview
+          - news_highlights
+    - matching_page:
+        description: "学生と企業をマッチングするプラットフォーム"
+        features:
+          - registration:
+              options:
+                - student_profile
+                - company_profile
+              fields:
+                - skills
+                - project_experience
+                - idea_overview
+          - search_matching:
+              filters:
+                - keywords
+                - industry
+                - technology_field
+              ai_recommendation: true
+          - communication_tools:
+              options:
+                - chat
+                - video_call
+                - nda_template
+          - reward_management:
+              options:
+                - crowdfunding
+                - contract_and_payment
+    - events_page:
+        description: "イベント（ビジネスコンテスト、起業セミナー）の開催管理"
+        features:
+          - registration_management:
+              options:
+                - online_form
+                - email_notifications
+          - session_management:
+              tools:
+                - session_calendar
+                - reminder_notifications
+          - content_distribution:
+              options:
+                - live_streaming
+                - recording_storage
+                - presentation_materials
+    - startup_support_page:
+        description: "スタートアップ支援内容を紹介"
+        features:
+          - funding:
+              description: "資金提供の案内"
+          - incubation_program:
+              description: "インキュベーションプログラム情報"
+          - office_space:
+              description: "オフィススペースの提供"
+          - mentorship:
+              description: "メンターやトレーニングの案内"
+    - contact_page:
+        description: "問い合わせやFAQの表示"
+        features:
+          - contact_form
+          - faq_section
+
+  user_features:
+    - registration_login:
+        methods:
+          - email_verification
+          - sns_login:
+              options:
+                - google
+                - linkedin
+                - github
+        profile_creation: true
+    - search_and_matching:
+        filters:
+          - keywords
+          - industry
+          - technology_field
+        ai_recommendation: true
+    - communication_tools:
+        options:
+          - chat
+          - video_call
+          - file_sharing
+    - reward_and_contract:
+        options:
+          - crowdfunding
+          - contract_payment_management
+
+  admin_features:
+    - user_management:
+        permissions:
+          - edit
+          - delete
+          - spam_control
+    - event_management:
+        tools:
+          - create_edit_delete_events
+          - manage_participants
+          - set_schedules_notifications
+    - content_management:
+        tools:
+          - manage_live_streams
+          - upload_delete_recordings
+          - share_presentation_materials
+    - revenue_management:
+        tools:
+          - track_event_revenue
+          - allocate_funds
+
+  design:
+    ui_ux:
+      mobile_friendly: true
+      color_theme: "blue-based"
+      navigation:
+        header_menu:
+          - home
+          - matching
+          - events
+          - support
+        breadcrumb: true
+    accessibility:
+      language_support:
+        - japanese
+        - english
+
+  technical_requirements:
+    frontend:
+      framework: "React.js or Vue.js"
+      styling: "Tailwind CSS or Material-UI"
+    backend:
+      framework: "Node.js (Express) or Django"
+      database: "PostgreSQL or MongoDB"
+    infrastructure:
+      hosting: "AWS, GCP, or Azure"
+      cdn: "Cloudflare"
+    security:
+      ssl_tls: true
+      data_encryption: true
+      authentication: "OAuth2.0"
+    api_integrations:
+      payment: "Stripe or PayPal"
+      chat_video: "Twilio, Zoom SDK"
+
+  maintenance_support:
+    - backup_frequency: "weekly"
+    - error_reporting_system: "ticket-based"
+    - faq_update_schedule: "monthly"
+

@@ -362,48 +362,31 @@ const eventData = [
     ],
     content: ["ビジネスプラン発表", "投資家によるフィードバック", "審査員による評価・表彰式"],
     sponsor: ["株式会社A", "株式会社B"],
-    isOnline: true,
-    creatorId: 1
+    isOnline: true
   },
   {
-    title: "第3回 Web 開発ハッカソン",
-    description: "最新の技術を使って、革新的なWebアプリケーションを開発するハッカソン。チームで協力して、アイデアを形にするチャンスです。",
-    date: new Date("2024-06-20"),
-    location: "東京・渋谷",
-    registration_deadline: new Date("2024-06-15"),
-    registration_fee: 3000,
-    revenue: 100000,
+    title: "スタートアップ企業向けマーケティング戦略セミナー",
+    description: "スタートアップ企業が市場に適応し、効果的なマーケティング戦略を立てるためのセミナー。",
+    date: new Date("2024-08-10"),
+    location: "大阪・会議室B",
+    registration_deadline: new Date("2024-08-05"),
+    registration_fee: 6000,
+    revenue: 18000,
     speakers: [
       {
-        name: "山田 健太郎",
-        role: "エンジニア",
-        bio: "Web開発のスペシャリスト。数々のプロジェクトを成功に導いた経験を持つ。"
-      }
-    ],
-    content: ["ハッカソン", "アイデアソン", "発表会", "審査・表彰"],
-    sponsor: ["株式会社C", "株式会社D"],
-    isOnline: false,
-    creatorId: 2
-  },
-  {
-    title: "AI 活用セミナー",
-    description: "AIの基礎知識から最新技術までを学ぶセミナー。AIに興味がある初心者から、より深く学びたい方まで、幅広い層の方におすすめです。",
-    date: new Date("2024-07-10"),
-    location: "大阪・梅田",
-    registration_deadline: new Date("2024-07-05"),
-    registration_fee: 5000,
-    revenue: 120000,
-    speakers: [
+        name: "川村 圭一",
+        role: "マーケティングコンサルタント",
+        bio: "スタートアップのマーケティング戦略に特化したコンサルタント。"
+      },
       {
-        name: "鈴木 美香",
-        role: "AI研究者",
-        bio: "AI研究に長年携わる第一人者。多くの論文を発表している。"
+        name: "田島 光",
+        role: "デジタルマーケティング専門家",
+        bio: "デジタルマーケティング分野での豊富な経験を持つ。"
       }
     ],
-    content: ["AIの基礎知識", "機械学習", "深層学習", "事例紹介"],
-    sponsor: ["株式会社E", "株式会社F"],
-    isOnline: false,
-    creatorId: 3
+    content: ["ターゲット市場の分析", "デジタル広告戦略", "ソーシャルメディア活用法"],
+    sponsor: ["株式会社E"],
+    isOnline: false
   }
 ];
 
@@ -492,9 +475,23 @@ async function seedDatabase() {
       }
     }
 
+    // Get a company user to be the event creator
+    const [adminUser] = await db
+      .select()
+      .from(users)
+      .where(eq(users.type, "company"))
+      .limit(1);
+
+    if (!adminUser) {
+      throw new Error("No company user found to create events");
+    }
+
     // Seed Events
     for (const event of eventData) {
-      await db.insert(events).values(event);
+      await db.insert(events).values({
+        ...event,
+        creatorId: adminUser.id // Use existing company user ID
+      });
       console.log(`Created event: ${event.title}`);
     }
 

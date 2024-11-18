@@ -56,6 +56,136 @@ const sampleData = {
       interests: ["AI", "Webサービス", "教育テクノロジー"],
       location: "Tokyo",
       availability: "週10時間"
+    },
+    {
+      id: "S002",
+      name: "Aya Suzuki",
+      role: "アイデア提供者",
+      skills: ["UI/UXデザイン", "企画"],
+      idea_overview: [
+        {
+          title: "環境保護ソーシャルプラットフォーム",
+          description: "ゴミ拾いイベントを簡単に企画・参加できるアプリ"
+        }
+      ],
+      location: "Osaka",
+      availability: "週20時間"
+    },
+    {
+      id: "S003",
+      name: "Kenji Yamamoto",
+      role: "技術提供者",
+      skills: ["Java", "Spring", "PostgreSQL"],
+      project_experience: [
+        {
+          project_name: "業務管理システムの開発",
+          description: "企業向けのバックエンドシステムを構築"
+        }
+      ],
+      interests: ["業務効率化", "クラウドコンピューティング"],
+      location: "Nagoya",
+      availability: "週15時間"
+    },
+    {
+      id: "S004",
+      name: "Haruka Nakamura",
+      role: "アイデア提供者",
+      skills: ["教育テクノロジー", "マーケティング"],
+      idea_overview: [
+        {
+          title: "AIを活用した学習プラットフォーム",
+          description: "個別カスタマイズされた学習計画を提供"
+        }
+      ],
+      location: "Tokyo",
+      availability: "週10時間"
+    },
+    {
+      id: "S005",
+      name: "Taro Matsumoto",
+      role: "技術提供者",
+      skills: ["Ruby", "Rails", "AWS"],
+      project_experience: [
+        {
+          project_name: "Eコマースプラットフォームの構築",
+          description: "サーバーサイドのAPIを設計"
+        }
+      ],
+      interests: ["Eコマース", "FinTech"],
+      location: "Osaka",
+      availability: "週25時間"
+    },
+    {
+      id: "S006",
+      name: "Mika Shimizu",
+      role: "アイデア提供者",
+      skills: ["企画", "デザイン"],
+      idea_overview: [
+        {
+          title: "健康管理アプリの新機能",
+          description: "睡眠データを活用したアドバイザー"
+        }
+      ],
+      location: "Kyoto",
+      availability: "週20時間"
+    },
+    {
+      id: "S007",
+      name: "Kenta Aoki",
+      role: "技術提供者",
+      skills: ["PHP", "Laravel", "MySQL"],
+      project_experience: [
+        {
+          project_name: "ブログサイトの開発",
+          description: "ユーザー認証とコメント機能を実装"
+        }
+      ],
+      interests: ["コンテンツ管理", "メディア"],
+      location: "Fukuoka",
+      availability: "週10時間"
+    },
+    {
+      id: "S008",
+      name: "Saki Takahashi",
+      role: "アイデア提供者",
+      skills: ["社会福祉", "リサーチ"],
+      idea_overview: [
+        {
+          title: "障がい者支援ツール",
+          description: "手話翻訳を行うAIシステム"
+        }
+      ],
+      location: "Hokkaido",
+      availability: "週15時間"
+    },
+    {
+      id: "S009",
+      name: "Shota Fujimoto",
+      role: "技術提供者",
+      skills: ["HTML", "CSS", "JavaScript"],
+      project_experience: [
+        {
+          project_name: "ポートフォリオサイトの開発",
+          description: "インタラクティブなUIを設計"
+        }
+      ],
+      interests: ["フロントエンド開発", "デザイン"],
+      location: "Kobe",
+      availability: "週5時間"
+    },
+    {
+      id: "S010",
+      name: "Kaori Yamashita",
+      role: "アイデア提供者",
+      skills: ["農業", "ビジネス企画"],
+      idea_overview: [
+        {
+          title: "農業IoTシステム",
+          description: "センサーデータを活用した農業支援アプリ"
+        }
+      ],
+      location: "Niigata",
+      availability: "週10時間"
     }
   ],
   companies: [
@@ -71,6 +201,123 @@ const sampleData = {
         }
       ],
       location: "Tokyo"
+    },
+    {
+      id: "C002",
+      name: "HealthNext Co.",
+      role: "アイデア提供者",
+      focus_areas: ["ヘルスケア", "AI"],
+      projects: [
+        {
+          project_name: "予防医療サービスの構築",
+          description: "健康プラン提供"
+        }
+      ],
+      location: "Osaka"
+    },
+    {
+      id: "C003",
+      name: "TechVision Ltd.",
+      role: "技術提供者",
+      expertise: ["クラウドコンピューティング", "IoT"],
+      projects: [
+        {
+          project_name: "工場管理システムのIoT化",
+          description: "センサー連携で効率化"
+        }
+      ],
+      location: "Nagoya"
+    },
+    {
+      id: "C004",
+      name: "EduPlus Inc.",
+      role: "アイデア提供者",
+      focus_areas: ["教育テクノロジー", "学習支援"],
+      projects: [
+        {
+          project_name: "オンライン学習プラットフォーム",
+          description: "AIベースの教育アプリ"
+        }
+      ],
+      location: "Tokyo"
+    },
+    {
+      id: "C005",
+      name: "AgriTech Solutions",
+      role: "技術提供者",
+      expertise: ["農業", "IoT"],
+      projects: [
+        {
+          project_name: "農場データ可視化ツール",
+          description: "収穫量を予測"
+        }
+      ],
+      location: "Niigata"
+    },
+    {
+      id: "C006",
+      name: "GreenLife Corp.",
+      role: "アイデア提供者",
+      focus_areas: ["エコ商品", "サステナビリティ"],
+      projects: [
+        {
+          project_name: "再利用素材のEコマース",
+          description: "サステナブル商品を販売"
+        }
+      ],
+      location: "Kyoto"
+    },
+    {
+      id: "C007",
+      name: "SafeTech Inc.",
+      role: "技術提供者",
+      expertise: ["セキュリティ", "AI"],
+      projects: [
+        {
+          project_name: "企業向けセキュリティツール",
+          description: "脅威分析システム"
+        }
+      ],
+      location: "Osaka"
+    },
+    {
+      id: "C008",
+      name: "SocialAid Co.",
+      role: "アイデア提供者",
+      focus_areas: ["福祉", "社会貢献"],
+      projects: [
+        {
+          project_name: "障がい者支援アプリ",
+          description: "音声と手話の翻訳"
+        }
+      ],
+      location: "Hokkaido"
+    },
+    {
+      id: "C009",
+      name: "DigitalCraft Inc.",
+      role: "技術提供者",
+      expertise: ["フロントエンド開発", "UI/UX"],
+      projects: [
+        {
+          project_name: "インタラクティブWebデザイン",
+          description: "動的なWebサイト構築"
+        }
+      ],
+      location: "Kobe"
+    },
+    {
+      id: "C010",
+      name: "HealthAid LLC",
+      role: "アイデア提供者",
+      focus_areas: ["ヘルスケア", "栄養管理"],
+      projects: [
+        {
+          project_name: "食事トラッキングアプリ",
+          description: "栄養データ分析"
+        }
+      ],
+      location: "Fukuoka"
     }
   ]
 };
@@ -79,6 +326,10 @@ async function seedDatabase() {
   console.log("Starting database seeding...");
 
   try {
+    // Clear existing data first
+    await db.delete(profiles);
+    await db.delete(users);
+    
     // Seed Students
     for (const student of sampleData.students) {
       // Check if user already exists
@@ -103,11 +354,14 @@ async function seedDatabase() {
           .returning();
 
         // Create profile
-        const skills = Array.isArray(student.skills)
+        const skills = Array.isArray(student.skills) 
           ? student.skills
-          : student.skills.flatMap(skill => 
-              Object.values(skill).flat()
-            );
+          : Object.values(student.skills).reduce((acc: string[], skill) => {
+              if (typeof skill === 'object') {
+                return [...acc, ...Object.values(skill).flat()];
+              }
+              return acc;
+            }, []);
 
         await db.insert(profiles).values({
           userId: newUser.id,
@@ -122,14 +376,11 @@ async function seedDatabase() {
         });
 
         console.log(`Created student: ${student.name}`);
-      } else {
-        console.log(`Student ${student.name} already exists, skipping...`);
       }
     }
 
     // Seed Companies
     for (const company of sampleData.companies) {
-      // Check if company already exists
       const [existingUser] = await db
         .select()
         .from(users)
@@ -166,8 +417,6 @@ async function seedDatabase() {
         });
 
         console.log(`Created company: ${company.name}`);
-      } else {
-        console.log(`Company ${company.name} already exists, skipping...`);
       }
     }
 

@@ -89,9 +89,14 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild>
-              <Link href="/profile">{t("common.login")}</Link>
-            </Button>
+            <>
+              <Button asChild variant="outline">
+                <Link href="/register">{t("common.register")}</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/login">{t("common.login")}</Link>
+              </Button>
+            </>
           )}
         </div>
       </div>

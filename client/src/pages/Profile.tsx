@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useUser } from "@/hooks/use-user";
 import { useForm } from "react-hook-form";
@@ -5,118 +6,177 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { insertUserSchema } from "db/schema";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "wouter";
 import { useState } from "react";
+import useSWR from "swr";
+import type { Profile } from "db/schema";
 
 export default function Profile() {
   const { t } = useI18n();
-  const { user, login, register: registerUser } = useUser();
+  const { user } = useUser();
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { data: profile } = useSWR<Profile>(
+    user ? `/api/profiles/${user.id}` : null
+  );
 
   const form = useForm({
-    resolver: zodResolver(insertUserSchema),
     defaultValues: {
-      username: "",
-      password: "",
-      email: "",
-      type: "student"
+      name: profile?.name || "",
+      bio: profile?.bio || "",
+      skills: (profile?.skills as string[])?.join(", ") || "",
+      location: profile?.location || "",
+      contactEmail: profile?.contactEmail || user?.email || "",
     }
   });
+
+  useEffect(() => {
+    if (!user) {
+      setLocation("/login");
+    }
+  }, [user, setLocation]);
+
+  useEffect(() => {
+    if (profile) {
+      form.reset({
+        name: profile.name || "",
+        bio: profile.bio || "",
+        skills: (profile.skills as string[])?.join(", ") || "",
+        location: profile.location || "",
+        contactEmail: profile.contactEmail || user?.email || "",
+      });
+    }
+  }, [profile, form, user]);
 
   const onSubmit = async (values: any) => {
     setIsSubmitting(true);
     try {
-      const result = user ? await login(values) : await registerUser(values);
-      if (result.ok) {
+      const response = await fetch("/api/profiles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...values,
+          skills: values.skills.split(",").map((s: string) => s.trim()).filter(Boolean),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
         toast({
-          title: user ? "Login successful" : "Registration successful",
-          description: result.message || "Welcome to StartupEcosystem!"
+          title: "Success",
+          description: "Profile updated successfully",
         });
-        setLocation("/matching");
       } else {
         toast({
           title: "Error",
-          description: result.message,
-          variant: "destructive"
+          description: data.message || "Failed to update profile",
+          variant: "destructive",
         });
       }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An error occurred while updating profile",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  if (!user) {
+    return null;
+  }
+
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-2xl mx-auto">
       <Card>
         <CardHeader>
-          <CardTitle>{user ? t("profile.editProfile") : t("common.login")}</CardTitle>
-          <CardDescription>
-            {!user && (
-              <div className="mt-2 text-sm space-y-1">
-                <p>Test credentials:</p>
-                <p>Username: S001</p>
-                <p>Password: S001</p>
-              </div>
-            )}
-          </CardDescription>
+          <CardTitle>{t("profile.editProfile")}</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="username"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>{t("profile.name")}</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Enter your username (e.g., S001)" />
+                      <Input {...field} placeholder="Enter your name" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
-                name="password"
+                name="bio"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Bio</FormLabel>
                     <FormControl>
-                      <Input 
-                        type="password" 
+                      <Textarea 
                         {...field} 
-                        placeholder="Enter your password" 
+                        placeholder="Tell us about yourself"
+                        className="min-h-[100px]"
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {!user && (
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="email" 
-                          {...field} 
-                          placeholder="Enter your email address" 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
+
+              <FormField
+                control={form.control}
+                name="skills"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("profile.skills")}</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter skills (comma-separated)" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter your location" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="contactEmail"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("profile.contact")}</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="email" placeholder="Enter contact email" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <Button 
                 type="submit" 
                 className="w-full"
@@ -125,7 +185,7 @@ export default function Profile() {
                 {isSubmitting ? (
                   <span>Loading...</span>
                 ) : (
-                  user ? t("common.submit") : t("common.login")
+                  t("common.submit")
                 )}
               </Button>
             </form>

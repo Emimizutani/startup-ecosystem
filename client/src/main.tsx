@@ -10,6 +10,8 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Matching from "./pages/Matching";
 import Events from "./pages/Events";
 import Support from "./pages/Support";
@@ -37,6 +39,8 @@ function App() {
         <main className="flex-grow container mx-auto px-4 py-8">
           <Switch>
             <Route path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
             <Route path="/profile" component={Profile} />
             <Route path="/matching" component={Matching} />
             <Route path="/events" component={Events} />

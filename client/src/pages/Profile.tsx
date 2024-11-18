@@ -32,7 +32,7 @@ export default function Profile() {
     if (result.ok) {
       toast({
         title: user ? "Login successful" : "Registration successful",
-        description: "Welcome to CommPlatform!"
+        description: "Welcome to StartupEcosystem!"
       });
       setLocation("/matching");
     } else {

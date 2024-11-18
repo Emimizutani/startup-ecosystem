@@ -24,7 +24,7 @@ export default function Header() {
     <header className="border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/">
-          <a className="text-2xl font-bold text-primary">CommPlatform</a>
+          <a className="text-2xl font-bold text-primary">StartupEcosystem</a>
         </Link>
 
         <NavigationMenu>

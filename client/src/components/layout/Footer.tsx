@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold mb-4">CommPlatform</h3>
+            <h3 className="font-bold mb-4">StartupEcosystem</h3>
             <p className="text-sm text-gray-600">
               Connecting students and companies for innovation
             </p>
@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t text-center text-sm text-gray-600">
-          <p>&copy; {new Date().getFullYear()} CommPlatform. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} StartupEcosystem. All rights reserved.</p>
         </div>
       </div>
     </footer>

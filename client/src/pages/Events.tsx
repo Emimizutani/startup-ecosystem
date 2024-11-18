@@ -4,16 +4,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import type { Event } from "db/schema";
 import { format } from "date-fns";
+import { startOfDay } from "date-fns";
 
 export default function Events() {
   const { t } = useI18n();
   const { data: events } = useSWR<Event[]>("/api/events");
 
   const upcomingEvents = events?.filter(
-    (event) => new Date(event.date) > new Date()
+    (event) => new Date(event.date) >= startOfDay(new Date())
   );
   const pastEvents = events?.filter(
-    (event) => new Date(event.date) <= new Date()
+    (event) => new Date(event.date) < startOfDay(new Date())
   );
 
   return (

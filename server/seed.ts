@@ -387,6 +387,30 @@ const eventData = [
     content: ["ターゲット市場の分析", "デジタル広告戦略", "ソーシャルメディア活用法"],
     sponsor: ["株式会社E"],
     isOnline: false
+  },
+  {
+    title: "スタートアップ成功事例シェアリングイベント",
+    description: "成功したスタートアップ企業がどのように成長したのか、そのノウハウを共有するイベント。",
+    date: new Date("2024-09-12"),
+    location: "名古屋・セミナールームA",
+    registration_deadline: new Date("2024-09-05"),
+    registration_fee: 7000,
+    revenue: 21000,
+    speakers: [
+      {
+        name: "三浦 佳世",
+        role: "起業家",
+        bio: "大手企業を立ち上げ、急成長を遂げた起業家。"
+      },
+      {
+        name: "村田 翔平",
+        role: "投資家",
+        bio: "スタートアップ企業への投資実績が豊富。"
+      }
+    ],
+    content: ["成功したスタートアップの秘訣", "成長するための戦略と実行", "投資家視点でのアドバイス"],
+    sponsor: ["株式会社F"],
+    isOnline: false
   }
 ];
 

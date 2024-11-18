@@ -2,7 +2,7 @@ import { Express } from "express";
 import { setupAuth } from "./auth";
 import { db } from "db";
 import { profiles, events, matches, messages } from "db/schema";
-import { eq, and, desc } from "drizzle-orm";
+import { eq, and, desc, or } from "drizzle-orm";
 
 export function registerRoutes(app: Express) {
   setupAuth(app);

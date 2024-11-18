@@ -57,9 +57,9 @@ export default function Login() {
           <CardTitle>{t("common.login")}</CardTitle>
           <CardDescription>
             <div className="mt-2 text-sm space-y-1">
-              <p>Test credentials:</p>
-              <p>Username: S001</p>
-              <p>Password: S001</p>
+              <div>Test credentials:</div>
+              <div>Username: S001</div>
+              <div>Password: S001</div>
             </div>
           </CardDescription>
         </CardHeader>

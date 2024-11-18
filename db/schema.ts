@@ -17,7 +17,7 @@ export const profiles = pgTable("profiles", {
   userId: integer("user_id").references(() => users.id).notNull(),
   name: text("name").notNull(),
   bio: text("bio"),
-  skills: jsonb("skills").$type<string[]>(),
+  skills: text("skills").array(),
   experience: text("experience"),
   location: text("location"),
   avatar: text("avatar"),

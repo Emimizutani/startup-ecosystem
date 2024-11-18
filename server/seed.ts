@@ -36,6 +36,19 @@ interface CompanyData {
   location: string;
 }
 
+function flattenSkills(skills: string[] | { [key: string]: string[] }[]): string[] {
+  if (Array.isArray(skills)) {
+    if (skills.length > 0 && typeof skills[0] === 'string') {
+      return skills as string[];
+    }
+    return (skills as { [key: string]: string[] }[]).reduce((acc: string[], skill) => {
+      const values = Object.values(skill).flat();
+      return [...acc, ...values];
+    }, []);
+  }
+  return [];
+}
+
 const sampleData = {
   students: [
     {
@@ -354,20 +367,13 @@ async function seedDatabase() {
           .returning();
 
         // Create profile
-        const skills = Array.isArray(student.skills) 
-          ? student.skills
-          : Object.values(student.skills).reduce((acc: string[], skill) => {
-              if (typeof skill === 'object') {
-                return [...acc, ...Object.values(skill).flat()];
-              }
-              return acc;
-            }, []);
+        const flattenedSkills = flattenSkills(student.skills);
 
         await db.insert(profiles).values({
           userId: newUser.id,
           name: student.name,
           bio: student.project_experience?.[0]?.description || student.idea_overview?.[0]?.description,
-          skills: skills,
+          skills: flattenedSkills,
           experience: student.project_experience
             ?.map(exp => `${exp.project_name}: ${exp.description}`)
             .join('\n'),

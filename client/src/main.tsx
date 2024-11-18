@@ -6,6 +6,7 @@ import { SWRConfig } from "swr";
 import { fetcher } from "./lib/fetcher";
 import { I18nContext, languages, type Language } from "./lib/i18n";
 import { Toaster } from "@/components/ui/toaster";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
@@ -17,47 +18,55 @@ import Events from "./pages/Events";
 import Support from "./pages/Support";
 
 function App() {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>("en");
 
   const t = (key: string) => {
-    const keys = key.split('.');
-    let value = languages[language];
+    const keys = key.split(".");
+    let value: any = languages[language];
+    
     for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k as keyof typeof value];
-      } else {
+      if (!value || typeof value !== "object") {
         return key;
       }
+      value = value[k];
     }
-    return value as string;
+
+    return value || key;
   };
 
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow container mx-auto px-4 py-8">
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/matching" component={Matching} />
-            <Route path="/events" component={Events} />
-            <Route path="/support" component={Support} />
-            <Route>404 - Page Not Found</Route>
-          </Switch>
-        </main>
-        <Footer />
-      </div>
-      <Toaster />
-    </I18nContext.Provider>
+    <ErrorBoundary>
+      <I18nContext.Provider value={{ language, setLanguage, t }}>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-grow container mx-auto px-4 py-8">
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/matching" component={Matching} />
+              <Route path="/events" component={Events} />
+              <Route path="/support" component={Support} />
+              <Route>404 - Page Not Found</Route>
+            </Switch>
+          </main>
+          <Footer />
+        </div>
+        <Toaster />
+      </I18nContext.Provider>
+    </ErrorBoundary>
   );
 }
 
-createRoot(document.getElementById("root")!).render(
+const root = createRoot(document.getElementById("root")!);
+root.render(
   <StrictMode>
-    <SWRConfig value={{ fetcher }}>
+    <SWRConfig value={{ 
+      fetcher,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false 
+    }}>
       <App />
     </SWRConfig>
   </StrictMode>

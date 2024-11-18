@@ -42,8 +42,7 @@ function flattenSkills(skills: string[] | { [key: string]: string[] }[]): string
       return skills as string[];
     }
     return (skills as { [key: string]: string[] }[]).reduce((acc: string[], skill) => {
-      const values = Object.values(skill).flat();
-      return [...acc, ...values];
+      return [...acc, ...Object.values(skill).flat()];
     }, []);
   }
   return [];

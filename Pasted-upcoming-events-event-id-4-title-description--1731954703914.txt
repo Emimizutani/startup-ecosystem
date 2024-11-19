@@ -1,0 +1,98 @@
+upcoming_events:
+  - event_id: 4
+    title: "スタートアップ企業向けマーケティング戦略セミナー"
+    description: "スタートアップ企業が市場に適応し、効果的なマーケティング戦略を立てるためのセミナー。"
+    date: "2024-08-10"
+    location: "大阪・会議室B"
+    registration_deadline: "2024-08-05"
+    speakers:
+      - name: "川村 圭一"
+        role: "マーケティングコンサルタント"
+        bio: "スタートアップのマーケティング戦略に特化したコンサルタント。"
+      - name: "田島 光"
+        role: "デジタルマーケティング専門家"
+        bio: "デジタルマーケティング分野での豊富な経験を持つ。"
+    content:
+      - "ターゲット市場の分析"
+      - "デジタル広告戦略"
+      - "ソーシャルメディア活用法"
+    registration_fee: 6000
+    sponsor:
+      - "株式会社E"
+    revenue: 18000
+
+  - event_id: 5
+    title: "スタートアップ成功事例シェアリングイベント"
+    description: "成功したスタートアップ企業がどのように成長したのか、そのノウハウを共有するイベント。"
+    date: "2024-09-12"
+    location: "名古屋・セミナールームA"
+    registration_deadline: "2024-09-05"
+    speakers:
+      - name: "三浦 佳世"
+        role: "起業家"
+        bio: "大手企業を立ち上げ、急成長を遂げた起業家。"
+      - name: "村田 翔平"
+        role: "投資家"
+        bio: "スタートアップ企業への投資実績が豊富。"
+    content:
+      - "成功したスタートアップの秘訣"
+      - "成長するための戦略と実行"
+      - "投資家視点でのアドバイス"
+    registration_fee: 7000
+    sponsor:
+      - "株式会社F"
+    revenue: 21000
+
+  - event_id: 6
+    title: "起業家向けピッチイベント"
+    description: "投資家に向けて自社のビジネスアイデアをピッチし、資金調達のチャンスを得るイベント。"
+    date: "2024-10-03"
+    location: "東京・渋谷"
+    registration_deadline: "2024-09-28"
+    speakers:
+      - name: "高橋 竜也"
+        role: "ピッチトレーナー"
+        bio: "ピッチスキル向上に特化したトレーナー。"
+      - name: "石田 千晶"
+        role: "エンジェル投資家"
+        bio: "投資家として数多くのスタートアップに資金提供している。"
+    content:
+      - "効果的なピッチの作り方"
+      - "投資家が重視するポイント"
+      - "質疑応答セッション"
+    registration_fee: 8000
+    sponsor:
+      - "株式会社G"
+    revenue: 24000
+
+  - event_id: 7
+    title: "スタートアップ資金調達の新しい潮流"
+    description: "クラウドファンディングやエンジェル投資を超えた新しい資金調達手法を紹介するセミナー。"
+    date: "2024-11-15"
+    location: "オンライン (Webex)"
+    registration_deadline: "2024-11-10"
+    speakers:
+      - name: "小林 拓也"
+        role: "クラウドファンディングプラットフォーム代表"
+        bio: "クラウドファンディング業界での経験を活かして、数多くのプロジェクトを支援。"
+      - name: "鈴木 亮"
+        role: "VCパートナー"
+        bio: "ベンチャーキャピタル業界での経験豊富な投資家。"
+    content:
+      - "新しい資金調達手法の紹介"
+      - "事例紹介と成功ポイント"
+      - "資金調達の戦略を考える"
+    registration_fee: 4000
+    sponsor:
+      - "株式会社H"
+    revenue: 12000
+
+  - event_id: 8
+    title: "スタートアップのためのチームビルディングセミナー"
+    description: "スタートアップチームの作り方と効率的なチームワークの築き方を学ぶセミナー。"
+    date: "2024-12-05"
+    location: "大阪・イベントホール"
+    registration_deadline: "2024-12-01"
+    speakers:
+      - name: "山田 智恵"
+        role: "チームビルディング

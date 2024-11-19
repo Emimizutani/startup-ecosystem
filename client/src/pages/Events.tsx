@@ -10,12 +10,13 @@ export default function Events() {
   const { t } = useI18n();
   const { data: events } = useSWR<Event[]>("/api/events");
 
-  const upcomingEvents = events?.filter(
-    (event) => new Date(event.date) >= startOfDay(new Date())
-  );
-  const pastEvents = events?.filter(
-    (event) => new Date(event.date) < startOfDay(new Date())
-  );
+  const upcomingEvents = events
+    ?.filter((event) => new Date(event.date) >= startOfDay(new Date()))
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const pastEvents = events
+    ?.filter((event) => new Date(event.date) < startOfDay(new Date()))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="space-y-8">

@@ -51,9 +51,11 @@ export default function Events() {
                     </div>
                   )}
                   <div className="flex items-center justify-between">
-                    <Badge variant={event.registration_fee === 0 ? "secondary" : "default"}>
-                      {event.registration_fee === 0 ? "無料" : `¥${event.registration_fee.toLocaleString()}`}
-                    </Badge>
+                    {event.registration_fee > 0 && (
+                      <Badge variant="default">
+                        ¥{event.registration_fee.toLocaleString()}
+                      </Badge>
+                    )}
                     <Button>{t("events.register")}</Button>
                   </div>
                 </div>

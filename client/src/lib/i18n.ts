@@ -56,7 +56,7 @@ export const languages = {
       cancel: "キャンセル",
     },
     home: {
-      title: "持続可能なスタートアップエコシステムを創る",
+      title: "持続可能なスタートアップエコシステムの創造",
       subtitle: "テクノロジーとイノベーションで最適なマッチングを",
       getStarted: "始めましょう",
     },

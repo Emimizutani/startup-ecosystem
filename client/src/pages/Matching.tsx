@@ -209,9 +209,9 @@ export default function Matching() {
                 <DialogTitle>{selectedProfile.name}</DialogTitle>
                 <DialogDescription>
                   {selectedProfile.type === "student" ? "Student" : "Company"}
-                  {selectedProfile.skills && typeof selectedProfile.skills === 'object' && 'role' in selectedProfile.skills && (
+                  {getProfileRole(selectedProfile.skills) && (
                     <Badge variant="secondary" className="ml-2">
-                      {selectedProfile.skills.role}
+                      {getProfileRole(selectedProfile.skills)}
                     </Badge>
                   )}
                 </DialogDescription>
@@ -278,9 +278,9 @@ export default function Matching() {
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   {profile.name}
-                  {profile.skills && typeof profile.skills === 'object' && 'role' in profile.skills && (
+                  {getProfileRole(profile.skills) && (
                     <Badge variant="secondary">
-                      {profile.skills.role}
+                      {getProfileRole(profile.skills)}
                     </Badge>
                   )}
                 </CardTitle>

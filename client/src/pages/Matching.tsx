@@ -118,8 +118,17 @@ export default function Matching() {
   };
 
   const getProfileRole = (skills: ProfileSkills): string | undefined => {
-    if (skills && typeof skills === 'object' && !Array.isArray(skills)) {
-      return skills.role;
+    if (!skills) return undefined;
+    
+    if (typeof skills === 'object' && !Array.isArray(skills)) {
+      if ('role' in skills) return skills.role;
+      // Handle nested skills object
+      if (skills.skills && Array.isArray(skills.skills)) {
+        const roleSkill = skills.skills.find(skill => 
+          skill === "技術提供者" || skill === "アイデア提供者"
+        );
+        return roleSkill;
+      }
     }
     return undefined;
   };

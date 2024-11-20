@@ -389,30 +389,6 @@ const eventData = [
     isOnline: false
   },
   {
-    title: "スタートアップ成功事例シェアリングイベント",
-    description: "成功したスタートアップ企業がどのように成長したのか、そのノウハウを共有するイベント。",
-    date: new Date("2024-09-12"),
-    location: "名古屋・セミナールームA",
-    registration_deadline: new Date("2024-09-05"),
-    registration_fee: 0,
-    revenue: 21000,
-    speakers: [
-      {
-        name: "三浦 佳世",
-        role: "起業家",
-        bio: "大手企業を立ち上げ、急成長を遂げた起業家。"
-      },
-      {
-        name: "村田 翔平",
-        role: "投資家",
-        bio: "スタートアップ企業への投資実績が豊富。"
-      }
-    ],
-    content: ["成功したスタートアップの秘訣", "成長するための戦略と実行", "投資家視点でのアドバイス"],
-    sponsor: ["株式会社F"],
-    isOnline: false
-  },
-  {
     title: "スタートアップ資金調達の新しい潮流",
     description: "クラウドファンディングやエンジェル投資を超えた新しい資金調達手法を紹介するセミナー。",
     date: new Date("2024-11-15"),
@@ -437,30 +413,6 @@ const eventData = [
     isOnline: true
   },
   {
-    title: "次世代スタートアップテクノロジーフェスティバル",
-    description: "AI、IoT、ブロックチェーンなど次世代技術を活用したスタートアップ企業が一堂に会するフェスティバル。",
-    date: new Date("2024-12-15"),
-    location: "東京ビッグサイト",
-    registration_deadline: new Date("2024-12-05"),
-    registration_fee: 0,
-    revenue: 50000,
-    speakers: [
-      {
-        name: "山田 太郎",
-        role: "AI研究者",
-        bio: "人工知能の研究において数々の賞を受賞している第一人者。"
-      },
-      {
-        name: "井上 京子",
-        role: "IoTエンジニア",
-        bio: "IoTソリューションを手掛ける企業の技術責任者。"
-      }
-    ],
-    content: ["最新技術のデモンストレーション", "スタートアップ企業ブース展示", "パネルディスカッション：次世代技術の可能性"],
-    sponsor: ["株式会社テクノロジーイノベーション", "未来創造ファンド"],
-    isOnline: false
-  },
-  {
     title: "グローバル市場進出戦略セミナー",
     description: "海外市場への展開を目指すスタートアップ向けに、成功するための戦略やノウハウを提供するセミナー。",
     date: new Date("2025-01-20"),
@@ -482,30 +434,6 @@ const eventData = [
     ],
     content: ["グローバル市場のトレンド分析", "文化的差異を乗り越えるためのポイント", "国際取引の成功事例紹介"],
     sponsor: ["株式会社グローバルパートナーズ"],
-    isOnline: false
-  },
-  {
-    title: "スタートアップエコシステム構築ワークショップ",
-    description: "起業家、投資家、支援者が協力して地域のスタートアップエコシステムを構築するためのワークショップ。",
-    date: new Date("2025-02-10"),
-    location: "名古屋・イノベーションホール",
-    registration_deadline: new Date("2025-02-01"),
-    registration_fee: 0,
-    revenue: 15000,
-    speakers: [
-      {
-        name: "石井 健",
-        role: "スタートアップコーディネーター",
-        bio: "地域エコシステム構築の実績を持つコーディネーター。"
-      },
-      {
-        name: "高橋 綾子",
-        role: "投資家",
-        bio: "多くのスタートアップ企業への投資経験を持つ。"
-      }
-    ],
-    content: ["地域資源を活用したエコシステムの構築方法", "参加者間のネットワーキングセッション", "エコシステムの成功事例共有"],
-    sponsor: ["地域経済活性化プロジェクト", "株式会社スタートアップジャパン"],
     isOnline: false
   },
   {

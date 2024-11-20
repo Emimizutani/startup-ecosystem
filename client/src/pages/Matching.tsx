@@ -26,7 +26,6 @@ import { useToast } from "@/hooks/use-toast";
 
 interface ProfileWithType extends Profile {
   type: 'student' | 'company';
-  role?: string;
 }
 
 interface SkillsData {
@@ -34,7 +33,10 @@ interface SkillsData {
   frameworks?: string[];
   other?: string[];
   skills?: string[];
+  role?: "技術提供者" | "アイデア提供者";
 }
+
+type ProfileSkills = SkillsData | string[] | null | undefined;
 
 function ProfileCardSkeleton() {
   return (
@@ -86,29 +88,40 @@ export default function Matching() {
     });
   };
 
-  const formatSkills = (skillsData: SkillsData | string[] | null | undefined): string[] => {
+  const formatSkills = (skillsData: ProfileSkills): string[] => {
+    if (!skillsData) return [];
+    
     if (Array.isArray(skillsData)) {
-      return skillsData;
+      return skillsData.map(skill => String(skill));
     }
     
-    if (typeof skillsData === 'object' && skillsData !== null) {
+    if (typeof skillsData === 'object') {
       const skills: string[] = [];
-      if (skillsData.programming_languages) {
+      
+      if (Array.isArray(skillsData.programming_languages)) {
         skills.push(...skillsData.programming_languages);
       }
-      if (skillsData.frameworks) {
+      if (Array.isArray(skillsData.frameworks)) {
         skills.push(...skillsData.frameworks);
       }
-      if (skillsData.other) {
+      if (Array.isArray(skillsData.other)) {
         skills.push(...skillsData.other);
       }
-      if (skillsData.skills) {
+      if (Array.isArray(skillsData.skills)) {
         skills.push(...skillsData.skills);
       }
+      
       return skills;
     }
     
     return [];
+  };
+
+  const getProfileRole = (skills: ProfileSkills): string | undefined => {
+    if (skills && typeof skills === 'object' && !Array.isArray(skills)) {
+      return skills.role;
+    }
+    return undefined;
   };
 
   const filteredProfiles = profiles?.filter((profile) => {
@@ -126,7 +139,7 @@ export default function Matching() {
 
     const matchesRoleFilter =
       roleFilter === "all" ||
-      profile.role === roleFilter;
+      getProfileRole(profile.skills) === roleFilter;
 
     return matchesSearch && matchesFilter && matchesRoleFilter;
   });
@@ -187,9 +200,9 @@ export default function Matching() {
                 <DialogTitle>{selectedProfile.name}</DialogTitle>
                 <DialogDescription>
                   {selectedProfile.type === "student" ? "Student" : "Company"}
-                  {selectedProfile.role && (
+                  {getProfileRole(selectedProfile.skills) && (
                     <Badge variant="outline" className="ml-2">
-                      {selectedProfile.role}
+                      {getProfileRole(selectedProfile.skills)}
                     </Badge>
                   )}
                 </DialogDescription>
@@ -256,9 +269,9 @@ export default function Matching() {
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   {profile.name}
-                  {profile.role && (
+                  {getProfileRole(profile.skills) && (
                     <Badge variant="outline">
-                      {profile.role}
+                      {getProfileRole(profile.skills)}
                     </Badge>
                   )}
                 </CardTitle>

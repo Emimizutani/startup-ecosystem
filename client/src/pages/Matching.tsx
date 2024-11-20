@@ -12,11 +12,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import type { Profile } from "db/schema";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProfileWithType extends Profile {
   type: 'student' | 'company';
+  role?: string;
+}
+
+interface SkillsData {
+  programming_languages?: string[];
+  frameworks?: string[];
+  other?: string[];
+  skills?: string[];
 }
 
 function ProfileCardSkeleton() {
@@ -46,23 +63,72 @@ export default function Matching() {
   const { user } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "students" | "companies">("all");
+  const [roleFilter, setRoleFilter] = useState<"all" | "技術提供者" | "アイデア提供者">("all");
+  const [selectedProfile, setSelectedProfile] = useState<ProfileWithType | null>(null);
+  const { toast } = useToast();
 
   const { data: profiles, error, isLoading } = useSWR<ProfileWithType[]>("/api/profiles");
+
+  const handleContact = async (profile: ProfileWithType) => {
+    if (!user) {
+      toast({
+        title: "ログインが必要です",
+        description: "プロフィールに連絡するにはログインしてください。",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // In a real application, this would create a match or start a conversation
+    toast({
+      title: "連絡リクエスト送信",
+      description: `${profile.name}さんに連絡リクエストを送信しました。`,
+    });
+  };
+
+  const formatSkills = (skillsData: SkillsData | string[] | null | undefined): string[] => {
+    if (Array.isArray(skillsData)) {
+      return skillsData;
+    }
+    
+    if (typeof skillsData === 'object' && skillsData !== null) {
+      const skills: string[] = [];
+      if (skillsData.programming_languages) {
+        skills.push(...skillsData.programming_languages);
+      }
+      if (skillsData.frameworks) {
+        skills.push(...skillsData.frameworks);
+      }
+      if (skillsData.other) {
+        skills.push(...skillsData.other);
+      }
+      if (skillsData.skills) {
+        skills.push(...skillsData.skills);
+      }
+      return skills;
+    }
+    
+    return [];
+  };
 
   const filteredProfiles = profiles?.filter((profile) => {
     const matchesSearch =
       !searchQuery ||
       profile.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (Array.isArray(profile.skills) && profile.skills.some(skill =>
+      formatSkills(profile.skills).some(skill =>
         skill.toLowerCase().includes(searchQuery.toLowerCase())
-      ));
+      );
 
     const matchesFilter =
       filter === "all" ||
       (filter === "students" && profile.type === "student") ||
       (filter === "companies" && profile.type === "company");
 
-    return matchesSearch && matchesFilter;
+    const matchesRoleFilter =
+      roleFilter === "all" ||
+      profile.role === roleFilter;
+
+    return matchesSearch && matchesFilter && matchesRoleFilter;
   });
 
   if (error) {
@@ -85,18 +151,89 @@ export default function Matching() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Select value={filter} onValueChange={(value: "all" | "students" | "companies") => setFilter(value)}>
-            <SelectTrigger className="w-32">
-              <SelectValue placeholder="Filter" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="students">Students</SelectItem>
-              <SelectItem value="companies">Companies</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="flex space-x-4">
+            <Select value={filter} onValueChange={(value: "all" | "students" | "companies") => setFilter(value)}>
+              <SelectTrigger className="w-32">
+                <SelectValue placeholder="Filter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="students">Students</SelectItem>
+                <SelectItem value="companies">Companies</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select 
+              value={roleFilter} 
+              onValueChange={(value: "all" | "技術提供者" | "アイデア提供者") => setRoleFilter(value)}
+            >
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">全て</SelectItem>
+                <SelectItem value="技術提供者">技術提供者</SelectItem>
+                <SelectItem value="アイデア提供者">アイデア提供者</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
+
+      <Dialog open={!!selectedProfile} onOpenChange={() => setSelectedProfile(null)}>
+        <DialogContent className="sm:max-w-[600px]">
+          {selectedProfile && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{selectedProfile.name}</DialogTitle>
+                <DialogDescription>
+                  {selectedProfile.type === "student" ? "Student" : "Company"}
+                  {selectedProfile.role && (
+                    <Badge variant="outline" className="ml-2">
+                      {selectedProfile.role}
+                    </Badge>
+                  )}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-medium mb-2">Bio</h4>
+                  <p className="text-sm text-muted-foreground">{selectedProfile.bio}</p>
+                </div>
+                {selectedProfile.skills && (
+                  <div>
+                    <h4 className="font-medium mb-2">Skills</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {formatSkills(selectedProfile.skills).map((skill, i) => (
+                        <Badge key={i} variant="secondary">{skill}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {selectedProfile.experience && (
+                  <div>
+                    <h4 className="font-medium mb-2">Experience</h4>
+                    <p className="text-sm text-muted-foreground whitespace-pre-line">
+                      {selectedProfile.experience}
+                    </p>
+                  </div>
+                )}
+                {selectedProfile.location && (
+                  <div>
+                    <h4 className="font-medium mb-2">Location</h4>
+                    <p className="text-sm text-muted-foreground">{selectedProfile.location}</p>
+                  </div>
+                )}
+                {user && selectedProfile.contactEmail && (
+                  <div>
+                    <h4 className="font-medium mb-2">Contact</h4>
+                    <p className="text-sm text-muted-foreground">{selectedProfile.contactEmail}</p>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {isLoading ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -111,25 +248,42 @@ export default function Matching() {
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProfiles?.map((profile) => (
-            <Card key={profile.id}>
+            <Card 
+              key={profile.id} 
+              className="cursor-pointer transition-shadow hover:shadow-lg"
+              onClick={() => setSelectedProfile(profile)}
+            >
               <CardHeader>
-                <CardTitle>{profile.name}</CardTitle>
+                <CardTitle className="flex items-center justify-between">
+                  {profile.name}
+                  {profile.role && (
+                    <Badge variant="outline">
+                      {profile.role}
+                    </Badge>
+                  )}
+                </CardTitle>
                 <div className="text-sm text-muted-foreground">
                   {profile.type === "student" ? "Student" : "Company"}
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">{profile.bio}</p>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{profile.bio}</p>
                   <div className="flex flex-wrap gap-2">
-                    {Array.isArray(profile.skills) && profile.skills.map((skill, i) => (
-                      <span
+                    {formatSkills(profile.skills).slice(0, 3).map((skill, i) => (
+                      <Badge
                         key={i}
-                        className="px-2 py-1 bg-primary/10 rounded-full text-xs"
+                        variant="secondary"
+                        className="text-xs"
                       >
                         {skill}
-                      </span>
+                      </Badge>
                     ))}
+                    {formatSkills(profile.skills).length > 3 && (
+                      <Badge variant="secondary" className="text-xs">
+                        +{formatSkills(profile.skills).length - 3}
+                      </Badge>
+                    )}
                   </div>
                   {profile.location && (
                     <div className="text-sm mt-2">
@@ -138,7 +292,15 @@ export default function Matching() {
                     </div>
                   )}
                   {user && user.id !== profile.userId && (
-                    <Button className="w-full mt-4">Connect</Button>
+                    <Button 
+                      className="w-full mt-4"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleContact(profile);
+                      }}
+                    >
+                      Contact
+                    </Button>
                   )}
                 </div>
               </CardContent>

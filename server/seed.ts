@@ -343,9 +343,9 @@ const eventData = [
   {
     title: "2024年スタートアップビジネスコンテスト",
     description: "新しいアイデアを持つスタートアップ企業が競い合うビジネスコンテスト。優勝者には資金援助とメンターシップが提供されます。",
-    date: new Date("2024-12-15"),
+    date: new Date("2024-05-15"),
     location: "オンライン (Zoom)",
-    registration_deadline: new Date("2024-12-10"),
+    registration_deadline: new Date("2024-05-10"),
     registration_fee: 0,
     revenue: 150000,
     speakers: [
@@ -367,9 +367,9 @@ const eventData = [
   {
     title: "スタートアップ企業向けマーケティング戦略セミナー",
     description: "スタートアップ企業が市場に適応し、効果的なマーケティング戦略を立てるためのセミナー。",
-    date: new Date("2024-11-30"),
+    date: new Date("2024-08-10"),
     location: "大阪・会議室B",
-    registration_deadline: new Date("2024-11-25"),
+    registration_deadline: new Date("2024-08-05"),
     registration_fee: 0,
     revenue: 18000,
     speakers: [
@@ -389,35 +389,11 @@ const eventData = [
     isOnline: false
   },
   {
-    title: "グローバル市場進出戦略セミナー",
-    description: "海外市場への展開を目指すスタートアップ向けに、成功するための戦略やノウハウを提供するセミナー。",
-    date: new Date("2025-01-20"),
-    location: "大阪・会議室D",
-    registration_deadline: new Date("2025-01-15"),
-    registration_fee: 0,
-    revenue: 21000,
-    speakers: [
-      {
-        name: "藤本 裕二",
-        role: "国際ビジネスコンサルタント",
-        bio: "グローバル企業の支援実績が豊富なビジネスコンサルタント。"
-      },
-      {
-        name: "西村 美咲",
-        role: "貿易アナリスト",
-        bio: "海外市場分析と貿易における戦略構築の専門家。"
-      }
-    ],
-    content: ["グローバル市場のトレンド分析", "文化的差異を乗り越えるためのポイント", "国際取引の成功事例紹介"],
-    sponsor: ["株式会社グローバルパートナーズ"],
-    isOnline: false
-  },
-  {
     title: "企業課題プログラミングコンテスト2024",
     description: "企業が実際の技術課題を提供し、学生がチームで解決策を競い合うプログラミングコンテスト。優勝チームには企業からの特別賞と採用特典が提供されます。",
-    date: new Date("2024-11-15"),
+    date: new Date("2024-10-25"),
     location: "オンライン (Discord & GitHub)",
-    registration_deadline: new Date("2024-11-10"),
+    registration_deadline: new Date("2024-10-15"),
     registration_fee: 0,
     revenue: 300000,
     speakers: [

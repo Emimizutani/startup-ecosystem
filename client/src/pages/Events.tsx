@@ -1,10 +1,12 @@
 import { useI18n } from "@/lib/i18n";
 import useSWR from "swr";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import type { Event } from "db/schema";
 import { format } from "date-fns";
 import { startOfDay } from "date-fns";
+import { CalendarIcon, MapPinIcon, Users2Icon } from "lucide-react";
 
 export default function Events() {
   const { t } = useI18n();
@@ -32,12 +34,28 @@ export default function Events() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm mb-4">{event.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">
-                    {event.isOnline ? "Online" : event.location}
-                  </span>
-                  <Button>{t("events.register")}</Button>
+                <p className="text-sm text-muted-foreground mb-4">{event.description}</p>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2 text-sm">
+                    <CalendarIcon className="h-4 w-4" />
+                    <span>締切: {format(new Date(event.registration_deadline), "PPP")}</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <MapPinIcon className="h-4 w-4" />
+                    <span>{event.isOnline ? "オンライン" : event.location}</span>
+                  </div>
+                  {event.speakers && (
+                    <div className="flex items-center space-x-2 text-sm">
+                      <Users2Icon className="h-4 w-4" />
+                      <span>{event.speakers.map(s => s.name).join(", ")}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <Badge variant={event.registration_fee === 0 ? "secondary" : "default"}>
+                      {event.registration_fee === 0 ? "無料" : `¥${event.registration_fee.toLocaleString()}`}
+                    </Badge>
+                    <Button>{t("events.register")}</Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

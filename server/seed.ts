@@ -343,9 +343,9 @@ const eventData = [
   {
     title: "2024年スタートアップビジネスコンテスト",
     description: "新しいアイデアを持つスタートアップ企業が競い合うビジネスコンテスト。優勝者には資金援助とメンターシップが提供されます。",
-    date: new Date("2024-05-15"),
+    date: new Date("2024-12-15"),
     location: "オンライン (Zoom)",
-    registration_deadline: new Date("2024-05-10"),
+    registration_deadline: new Date("2024-12-10"),
     registration_fee: 0,
     revenue: 150000,
     speakers: [
@@ -367,9 +367,9 @@ const eventData = [
   {
     title: "スタートアップ企業向けマーケティング戦略セミナー",
     description: "スタートアップ企業が市場に適応し、効果的なマーケティング戦略を立てるためのセミナー。",
-    date: new Date("2024-08-10"),
+    date: new Date("2024-11-30"),
     location: "大阪・会議室B",
-    registration_deadline: new Date("2024-08-05"),
+    registration_deadline: new Date("2024-11-25"),
     registration_fee: 0,
     revenue: 18000,
     speakers: [
@@ -389,35 +389,11 @@ const eventData = [
     isOnline: false
   },
   {
-    title: "スタートアップ資金調達の新しい潮流",
-    description: "クラウドファンディングやエンジェル投資を超えた新しい資金調達手法を紹介するセミナー。",
-    date: new Date("2024-11-15"),
-    location: "オンライン (Webex)",
-    registration_deadline: new Date("2024-11-10"),
-    registration_fee: 4000,
-    revenue: 12000,
-    speakers: [
-      {
-        name: "小林 拓也",
-        role: "クラウドファンディングプラットフォーム代表",
-        bio: "クラウドファンディング業界での経験を活かして、数々のプロジェクトを支援。"
-      },
-      {
-        name: "鈴木 亮",
-        role: "VCパートナー",
-        bio: "ベンチャーキャピタル業界での経験豊富な投資家。"
-      }
-    ],
-    content: ["新しい資金調達手法の紹介", "事例紹介と成功ポイント", "資金調達の戦略を考える"],
-    sponsor: ["株式会社H"],
-    isOnline: true
-  },
-  {
     title: "グローバル市場進出戦略セミナー",
     description: "海外市場への展開を目指すスタートアップ向けに、成功するための戦略やノウハウを提供するセミナー。",
     date: new Date("2025-01-20"),
     location: "大阪・会議室D",
-    registration_deadline: new Date("2025-01-10"),
+    registration_deadline: new Date("2025-01-15"),
     registration_fee: 0,
     revenue: 21000,
     speakers: [
@@ -439,9 +415,9 @@ const eventData = [
   {
     title: "企業課題プログラミングコンテスト2024",
     description: "企業が実際の技術課題を提供し、学生がチームで解決策を競い合うプログラミングコンテスト。優勝チームには企業からの特別賞と採用特典が提供されます。",
-    date: new Date("2024-10-25"),
+    date: new Date("2024-11-15"),
     location: "オンライン (Discord & GitHub)",
-    registration_deadline: new Date("2024-10-15"),
+    registration_deadline: new Date("2024-11-10"),
     registration_fee: 0,
     revenue: 300000,
     speakers: [

@@ -345,7 +345,10 @@ async function seedDatabase() {
           userId: newUser.id,
           name: student.name,
           bio: student.project_experience?.[0]?.description || student.idea_overview?.[0]?.description,
-          skills: processSkills(student.skills),
+          skills: {
+            ...processSkills(student.skills),
+            role: student.role
+          },
           experience: student.project_experience
             ?.map(exp => `${exp.project_name}: ${exp.description}`)
             .join('\n'),
@@ -384,7 +387,10 @@ async function seedDatabase() {
           userId: newUser.id,
           name: company.name,
           bio: company.projects[0].description,
-          skills: { skills: skills },
+          skills: {
+            skills: skills,
+            role: company.role
+          },
           experience: company.projects
             .map(proj => `${proj.project_name}: ${proj.description}`)
             .join('\n'),

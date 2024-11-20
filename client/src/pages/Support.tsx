@@ -17,14 +17,14 @@ export default function Support() {
     <div className="space-y-12">
       <section>
         <h2 className="text-2xl font-bold mb-6">{t("support.startupResources")}</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>{t("support.mentorship")}</CardTitle>
+              <CardTitle>資金提供</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                Connect with experienced mentors in your field
+                スタートアップの成長をサポートする資金調達機会の提供
               </p>
               <Button variant="outline" className="w-full">
                 Learn More
@@ -34,11 +34,11 @@ export default function Support() {
           
           <Card>
             <CardHeader>
-              <CardTitle>{t("support.funding")}</CardTitle>
+              <CardTitle>インキュベーションプログラム</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                Explore funding opportunities and resources
+                事業成長に必要なリソースとノウハウを提供するプログラム
               </p>
               <Button variant="outline" className="w-full">
                 Learn More
@@ -48,14 +48,28 @@ export default function Support() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Resources</CardTitle>
+              <CardTitle>オフィススペースの提供</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                Access educational materials and guides
+                スタートアップに最適な作業環境とネットワーキングスペース
               </p>
               <Button variant="outline" className="w-full">
-                View Resources
+                Learn More
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>メンターシップ</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                経験豊富な起業家やビジネス専門家によるメンタリング
+              </p>
+              <Button variant="outline" className="w-full">
+                Learn More
               </Button>
             </CardContent>
           </Card>
@@ -65,18 +79,28 @@ export default function Support() {
       <section>
         <h2 className="text-2xl font-bold mb-6">FAQ</h2>
         <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>How do I get started?</AccordionTrigger>
+          <AccordionItem value="funding">
+            <AccordionTrigger>資金調達の申請方法を教えてください。</AccordionTrigger>
             <AccordionContent>
-              Create an account, complete your profile, and start connecting with
-              students or companies based on your needs.
+              資金調達の申請は、まずプロフィールを完成させ、ビジネスプランを提出することから始まります。審査後、適切な資金調達方法についてアドバイスを提供します。
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>What is the matching process?</AccordionTrigger>
+          <AccordionItem value="incubation">
+            <AccordionTrigger>インキュベーションプログラムの期間はどのくらいですか？</AccordionTrigger>
             <AccordionContent>
-              Our AI-powered system matches students and companies based on skills,
-              interests, and requirements.
+              通常のプログラムは3〜6ヶ月間です。プログラム期間中は、メンタリング、ワークショップ、ネットワーキングイベントなどが提供されます。
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="office">
+            <AccordionTrigger>オフィススペースの利用条件はありますか？</AccordionTrigger>
+            <AccordionContent>
+              登録済みのスタートアップであれば、フレキシブルなプランから選択して利用できます。24時間利用可能で、会議室やイベントスペースも予約可能です。
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="mentorship">
+            <AccordionTrigger>メンターとのマッチング方法について教えてください。</AccordionTrigger>
+            <AccordionContent>
+              ご登録後、事業領域や課題に基づいて最適なメンターをご紹介します。メンターとの初回面談で相性を確認し、継続的なサポートを受けることができます。
             </AccordionContent>
           </AccordionItem>
         </Accordion>

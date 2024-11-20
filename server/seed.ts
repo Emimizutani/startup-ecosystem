@@ -159,49 +159,6 @@ const sampleData = {
       interests: ["コンテンツ管理", "メディア"],
       location: "Fukuoka",
       availability: "週10時間"
-    },
-    {
-      id: "S008",
-      name: "Saki Takahashi",
-      role: "アイデア提供者",
-      skills: ["社会福祉", "リサーチ"],
-      idea_overview: [
-        {
-          title: "障がい者支援ツール",
-          description: "手話翻訳を行うAIシステム"
-        }
-      ],
-      location: "Hokkaido",
-      availability: "週15時間"
-    },
-    {
-      id: "S009",
-      name: "Shota Fujimoto",
-      role: "技術提供者",
-      skills: ["HTML", "CSS", "JavaScript"],
-      project_experience: [
-        {
-          project_name: "ポートフォリオサイトの開発",
-          description: "インタラクティブなUIを設計"
-        }
-      ],
-      interests: ["フロントエンド開発", "デザイン"],
-      location: "Kobe",
-      availability: "週5時間"
-    },
-    {
-      id: "S010",
-      name: "Kaori Yamashita",
-      role: "アイデア提供者",
-      skills: ["農業", "ビジネス企画"],
-      idea_overview: [
-        {
-          title: "農業IoTシステム",
-          description: "センサーデータを活用した農業支援アプリ"
-        }
-      ],
-      location: "Niigata",
-      availability: "週10時間"
     }
   ],
   companies: [
@@ -269,71 +226,6 @@ const sampleData = {
         }
       ],
       location: "Niigata"
-    },
-    {
-      id: "C006",
-      name: "GreenLife Corp.",
-      role: "アイデア提供者",
-      focus_areas: ["エコ商品", "サステナビリティ"],
-      projects: [
-        {
-          project_name: "再利用素材のEコマース",
-          description: "サステナブル商品を販売"
-        }
-      ],
-      location: "Kyoto"
-    },
-    {
-      id: "C007",
-      name: "SafeTech Inc.",
-      role: "技術提供者",
-      expertise: ["セキュリティ", "AI"],
-      projects: [
-        {
-          project_name: "企業向けセキュリティツール",
-          description: "脅威分析システム"
-        }
-      ],
-      location: "Osaka"
-    },
-    {
-      id: "C008",
-      name: "SocialAid Co.",
-      role: "アイデア提供者",
-      focus_areas: ["福祉", "社会貢献"],
-      projects: [
-        {
-          project_name: "障がい者支援アプリ",
-          description: "音声と手話の翻訳"
-        }
-      ],
-      location: "Hokkaido"
-    },
-    {
-      id: "C009",
-      name: "DigitalCraft Inc.",
-      role: "技術提供者",
-      expertise: ["フロントエンド開発", "UI/UX"],
-      projects: [
-        {
-          project_name: "インタラクティブWebデザイン",
-          description: "動的なWebサイト構築"
-        }
-      ],
-      location: "Kobe"
-    },
-    {
-      id: "C010",
-      name: "HealthAid LLC",
-      role: "アイデア提供者",
-      focus_areas: ["ヘルスケア", "栄養管理"],
-      projects: [
-        {
-          project_name: "食事トラッキングアプリ",
-          description: "栄養データ分析"
-        }
-      ],
-      location: "Fukuoka"
     }
   ]
 };

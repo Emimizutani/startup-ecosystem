@@ -15,7 +15,7 @@ export const languages = {
       cancel: "Cancel",
     },
     home: {
-      title: "Connect Students & Companies",
+      title: "Building a Sustainable Startup Ecosystem",
       subtitle: "Find your perfect match in tech and innovation",
       getStarted: "Get Started",
     },
@@ -56,7 +56,7 @@ export const languages = {
       cancel: "キャンセル",
     },
     home: {
-      title: "学生と企業をつなぐ",
+      title: "持続可能なスタートアップエコシステムを創る",
       subtitle: "テクノロジーとイノベーションで最適なマッチングを",
       getStarted: "始めましょう",
     },

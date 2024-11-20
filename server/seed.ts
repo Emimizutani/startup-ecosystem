@@ -346,7 +346,7 @@ const eventData = [
     date: new Date("2024-05-15"),
     location: "オンライン (Zoom)",
     registration_deadline: new Date("2024-05-10"),
-    registration_fee: 5000,
+    registration_fee: 0,
     revenue: 150000,
     speakers: [
       {
@@ -370,7 +370,7 @@ const eventData = [
     date: new Date("2024-08-10"),
     location: "大阪・会議室B",
     registration_deadline: new Date("2024-08-05"),
-    registration_fee: 6000,
+    registration_fee: 0,
     revenue: 18000,
     speakers: [
       {
@@ -394,7 +394,7 @@ const eventData = [
     date: new Date("2024-09-12"),
     location: "名古屋・セミナールームA",
     registration_deadline: new Date("2024-09-05"),
-    registration_fee: 7000,
+    registration_fee: 0,
     revenue: 21000,
     speakers: [
       {
@@ -442,7 +442,7 @@ const eventData = [
     date: new Date("2024-12-15"),
     location: "東京ビッグサイト",
     registration_deadline: new Date("2024-12-05"),
-    registration_fee: 10000,
+    registration_fee: 0,
     revenue: 50000,
     speakers: [
       {
@@ -466,7 +466,7 @@ const eventData = [
     date: new Date("2025-01-20"),
     location: "大阪・会議室D",
     registration_deadline: new Date("2025-01-10"),
-    registration_fee: 7000,
+    registration_fee: 0,
     revenue: 21000,
     speakers: [
       {
@@ -490,7 +490,7 @@ const eventData = [
     date: new Date("2025-02-10"),
     location: "名古屋・イノベーションホール",
     registration_deadline: new Date("2025-02-01"),
-    registration_fee: 5000,
+    registration_fee: 0,
     revenue: 15000,
     speakers: [
       {

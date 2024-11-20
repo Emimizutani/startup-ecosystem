@@ -20,11 +20,11 @@ export default function Support() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>資金提供</CardTitle>
+              <CardTitle>{t("support.fundingTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                スタートアップの成長をサポートする資金調達機会の提供
+                {t("support.fundingDesc")}
               </p>
               <Button variant="outline" className="w-full">
                 Learn More
@@ -34,11 +34,11 @@ export default function Support() {
           
           <Card>
             <CardHeader>
-              <CardTitle>インキュベーションプログラム</CardTitle>
+              <CardTitle>{t("support.incubationTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                事業成長に必要なリソースとノウハウを提供するプログラム
+                {t("support.incubationDesc")}
               </p>
               <Button variant="outline" className="w-full">
                 Learn More
@@ -48,11 +48,11 @@ export default function Support() {
 
           <Card>
             <CardHeader>
-              <CardTitle>オフィススペースの提供</CardTitle>
+              <CardTitle>{t("support.officeTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                スタートアップに最適な作業環境とネットワーキングスペース
+                {t("support.officeDesc")}
               </p>
               <Button variant="outline" className="w-full">
                 Learn More
@@ -62,11 +62,11 @@ export default function Support() {
 
           <Card>
             <CardHeader>
-              <CardTitle>メンターシップ</CardTitle>
+              <CardTitle>{t("support.mentorshipTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                経験豊富な起業家やビジネス専門家によるメンタリング
+                {t("support.mentorshipDesc")}
               </p>
               <Button variant="outline" className="w-full">
                 Learn More
@@ -80,27 +80,27 @@ export default function Support() {
         <h2 className="text-2xl font-bold mb-6">FAQ</h2>
         <Accordion type="single" collapsible>
           <AccordionItem value="funding">
-            <AccordionTrigger>資金調達の申請方法を教えてください。</AccordionTrigger>
+            <AccordionTrigger>{t("support.faqFundingQ")}</AccordionTrigger>
             <AccordionContent>
-              資金調達の申請は、まずプロフィールを完成させ、ビジネスプランを提出することから始まります。審査後、適切な資金調達方法についてアドバイスを提供します。
+              {t("support.faqFundingA")}
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="incubation">
-            <AccordionTrigger>インキュベーションプログラムの期間はどのくらいですか？</AccordionTrigger>
+            <AccordionTrigger>{t("support.faqIncubationQ")}</AccordionTrigger>
             <AccordionContent>
-              通常のプログラムは3〜6ヶ月間です。プログラム期間中は、メンタリング、ワークショップ、ネットワーキングイベントなどが提供されます。
+              {t("support.faqIncubationA")}
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="office">
-            <AccordionTrigger>オフィススペースの利用条件はありますか？</AccordionTrigger>
+            <AccordionTrigger>{t("support.faqOfficeQ")}</AccordionTrigger>
             <AccordionContent>
-              登録済みのスタートアップであれば、フレキシブルなプランから選択して利用できます。24時間利用可能で、会議室やイベントスペースも予約可能です。
+              {t("support.faqOfficeA")}
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="mentorship">
-            <AccordionTrigger>メンターとのマッチング方法について教えてください。</AccordionTrigger>
+            <AccordionTrigger>{t("support.faqMentorshipQ")}</AccordionTrigger>
             <AccordionContent>
-              ご登録後、事業領域や課題に基づいて最適なメンターをご紹介します。メンターとの初回面談で相性を確認し、継続的なサポートを受けることができます。
+              {t("support.faqMentorshipA")}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
